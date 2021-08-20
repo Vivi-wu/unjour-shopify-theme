@@ -8,6 +8,7 @@
 
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 
+<script src="{{ 'lazy-loading-img.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'collection-filters-form.js' | asset_url }}" defer="defer"></script>
 
 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
@@ -227,7 +228,7 @@
                 <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
               </svg>
             </div>
-          </div>          
+          </div>
         </form>
       </collection-filters-form>
     {%- endunless -%}
@@ -257,7 +258,7 @@
                     <details class="mobile-facets__details js-filter" data-index="mobile-{{ forloop.index }}">
                       <summary class="mobile-facets__summary">
                         <div>
-                          <span>{{ filter.label | escape }}</span>                        
+                          <span>{{ filter.label | escape }}</span>
                           <span class="mobile-facets__arrow no-js-hidden">{% render 'icon-arrow' %}</span>
                           <noscript>{% render 'icon-caret' %}</noscript>
                         </div>

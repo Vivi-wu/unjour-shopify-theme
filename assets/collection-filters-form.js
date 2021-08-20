@@ -78,6 +78,7 @@ class CollectionFiltersForm extends HTMLElement {
 
   renderProductGrid(html) {
     document.getElementById('CollectionProductGrid').innerHTML = new DOMParser().parseFromString(html, 'text/html').getElementById('CollectionProductGrid').innerHTML;
+    document.dispatchEvent(new CustomEvent('productCardRendered'));
   }
 
   renderProductCount(html) {
