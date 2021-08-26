@@ -189,7 +189,8 @@
                 <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                       <fieldset class="js product-form__input">
-                        <legend class="form__label">{{ option.name }}</legend>
+                        {%- capture o_name -%}{{ option.name | downcase }}{%- endcapture -%}
+                        <legend class="form__label">{{ option.name }}{%- if o_name == 'size' -%}<size-chart-trigger></size-chart-trigger>{%- endif -%}</legend>
                         {%- for value in option.values -%}
                           <input type="radio" id="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}"
                                 name="{{ option.name }}"
@@ -259,6 +260,20 @@
                 </div>
               </div>
             </noscript>
+          {%- when 'size_chart' -%}
+            {%- liquid
+            if product.options contains 'Size'
+              for collecion in product.collections
+                assign pageHandler = collecion.handle | append: "-size-chart"
+                assign size_chart = pages[pageHandler]
+                if size_chart != empty
+                  assign anchor_id = "ProductModal-" | append: section.id
+                  render 'size-chart', block_id: block.id, size_chart: size_chart, anchor_id: anchor_id
+                  break
+                endif
+              endfor
+            endif-%}
+
           {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
@@ -542,6 +557,11 @@
           "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
         }
       ]
+    },
+    {
+      "type": "size_chart",
+      "name": "t:sections.main-product.blocks.size_chart.name",
+      "limit": 1
     },
     {
       "type": "buy_buttons",

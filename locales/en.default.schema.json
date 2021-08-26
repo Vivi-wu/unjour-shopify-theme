@@ -1144,6 +1144,9 @@
             }
           }
         },
+        "size_chart": {
+          "name": "Size chart"
+        },
         "buy_buttons": {
           "name": "Buy buttons",
           "settings": {

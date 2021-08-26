@@ -1,0 +1,28 @@
+<modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block_id }}">
+  <button id="ProductPopup-{{ block_id }}" class="link" type="button" aria-haspopup="dialog">See Size Chart</button>
+</modal-opener>
+<modal-dialog id="PopupModal-{{ block_id }}" class="product-popup-modal">
+  <div role="dialog" aria-label="See Size Chart" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+    <button id="ModalClose-{{ block_id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+    <div class="product-popup-modal__content-info">
+      <h1 class="h2">{{ size_chart.title }}</h1>
+      {{ size_chart.content }}
+    </div>
+  </div>
+</modal-dialog>
+
+<script>
+function initSizeChart () {
+  var triggerHolderEle = document.querySelector('size-chart-trigger');
+  var triggerEle = document.querySelector('[data-modal="#PopupModal-{{ block_id }}"]')
+  triggerHolderEle.append(triggerEle);
+  var anchorEle = document.getElementById('{{ anchor_id }}');
+  var sizeChartModal = document.getElementById('PopupModal-{{ block_id }}');
+  anchorEle.parentNode.append(sizeChartModal);
+}
+if (document.readyState !== 'loading') {
+  initSizeChart();
+} else {
+  document.addEventListener('DOMContentLoaded', initSizeChart);
+}
+</script>
