@@ -36,6 +36,18 @@
         }
       }
     },
+    "images": {
+      "name": "Images",
+      "settings": {
+        "header__1": {
+          "content": "Loading image"
+        },
+        "loading_img": {
+          "label": "Product card placeholder image",
+          "info": "Better limit to 64 x 64px"
+        }
+      }
+    },
     "typography": {
       "name": "Typography",
       "settings": {

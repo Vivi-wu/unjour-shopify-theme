@@ -67,6 +67,21 @@
     ]
   },
   {
+    "name": "t:settings_schema.images.name",
+    "settings":[
+      {
+        "type": "header",
+        "content": "t:settings_schema.images.settings.header__1.content"
+      },
+      {
+        "type": "image_picker",
+        "id": "loading_img",
+        "label": "t:settings_schema.images.settings.loading_img.label",
+        "info": "t:settings_schema.images.settings.loading_img.info"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.typography.name",
     "settings": [
       {
