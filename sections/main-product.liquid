@@ -467,7 +467,8 @@
 {%- endif -%}
 
 {% if section.settings.enable_size_chart %}
-  {%- render 'product-page-sizechart', product: product, section: section -%}
+  {% assign sc_block = section.blocks | where: "type", "size_chart" | first %}
+  {%- render 'product-page-sizechart', product: product, section: section, block: sc_block -%}
 {%- endif -%}
 
 {% schema %}
@@ -552,7 +553,15 @@
     {
       "type": "size_chart",
       "name": "t:sections.main-product.blocks.size_chart.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "trigger_text",
+          "label": "t:sections.main-product.blocks.size_chart.settings.trigger_text.label",
+          "default": "See Size Guide"
+        }
+      ]
     },
     {
       "type": "buy_buttons",

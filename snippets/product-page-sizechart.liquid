@@ -5,7 +5,7 @@
       .then(text => {
         var fragment = new DocumentFragment()
         var div = document.createElement('div')
-        div.innerHTML = text
+        div.innerHTML = text.replace(new RegExp("trigger_text", 'g'), '{{ block.settings.trigger_text }}')
         fragment.append(div)
         var parentEle = fragment.getElementById('shopify-section-sizechart')
         if (parentEle.innerHTML) {

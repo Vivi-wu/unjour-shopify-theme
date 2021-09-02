@@ -1145,7 +1145,12 @@
           }
         },
         "size_chart": {
-          "name": "Size chart"
+          "name": "Size chart",
+          "settings": {
+            "trigger_text": {
+              "label": "Text"
+            }
+          }
         },
         "buy_buttons": {
           "name": "Buy buttons",
