@@ -1148,7 +1148,16 @@
           "name": "Size chart",
           "settings": {
             "trigger_text": {
-              "label": "Text"
+              "label": "Trigger Text"
+            },
+            "trigger_position": {
+              "label": "Trigger Position",
+              "options__1": {
+                "label": "Besides option name"
+              },
+              "options__2": {
+                "label": "Above Add to Cart button"
+              }
             }
           }
         },

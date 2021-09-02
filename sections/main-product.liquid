@@ -17,6 +17,10 @@
   <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+{%- comment -%}尺码表{%- endcomment -%}
+{% assign sc_block = section.blocks | where: "type", "size_chart" | first %}
+{% assign sc_trigger_pos = sc_block.settings.trigger_position %}
+
 <section class="page-width">
   <div class="product grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
@@ -190,7 +194,9 @@
                   {%- for option in product.options_with_values -%}
                       <fieldset class="js product-form__input">
                         {%- capture o_name -%}{{ option.name | downcase }}{%- endcapture -%}
-                        <legend class="form__label">{{ option.name }}{%- if o_name == 'size' -%}<sizechart-trigger></sizechart-trigger>{%- endif -%}</legend>
+                        <legend class="form__label">{{ option.name }}
+                          {%- if o_name == 'size' and sc_trigger_pos == '1' -%}<sizechart-trigger></sizechart-trigger>{%- endif -%}
+                        </legend>
                         {%- for value in option.values -%}
                           <input type="radio" id="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}"
                                 name="{{ option.name }}"
@@ -262,6 +268,7 @@
             </noscript>
 
           {%- when 'buy_buttons' -%}
+            {%- if sc_trigger_pos == '2' -%}<sizechart-trigger></sizechart-trigger>{%- endif -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
                 {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
@@ -467,7 +474,6 @@
 {%- endif -%}
 
 {% if section.settings.enable_size_chart %}
-  {% assign sc_block = section.blocks | where: "type", "size_chart" | first %}
   {%- render 'product-page-sizechart', product: product, section: section, block: sc_block -%}
 {%- endif -%}
 
@@ -560,6 +566,22 @@
           "id": "trigger_text",
           "label": "t:sections.main-product.blocks.size_chart.settings.trigger_text.label",
           "default": "See Size Guide"
+        },
+        {
+          "type": "select",
+          "id": "trigger_position",
+          "options": [
+            {
+              "value": "1",
+              "label": "t:sections.main-product.blocks.size_chart.settings.trigger_position.options__1.label"
+            },
+            {
+              "value": "2",
+              "label": "t:sections.main-product.blocks.size_chart.settings.trigger_position.options__2.label"
+            }
+          ],
+          "default": "1",
+          "label": "t:sections.main-product.blocks.size_chart.settings.trigger_position.label"
         }
       ]
     },
