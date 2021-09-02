@@ -29,6 +29,9 @@
         "quantity_selector": {
           "type": "quantity_selector"
         },
+        "size_chart": {
+          "type": "size_chart"
+        },
         "buy_buttons": {
           "type": "buy_buttons"
         },
@@ -46,6 +49,7 @@
         "price",
         "variant_picker",
         "quantity_selector",
+        "size_chart",
         "buy_buttons",
         "description",
         "share"

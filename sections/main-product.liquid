@@ -190,7 +190,7 @@
                   {%- for option in product.options_with_values -%}
                       <fieldset class="js product-form__input">
                         {%- capture o_name -%}{{ option.name | downcase }}{%- endcapture -%}
-                        <legend class="form__label">{{ option.name }}{%- if o_name == 'size' -%}<size-chart-trigger></size-chart-trigger>{%- endif -%}</legend>
+                        <legend class="form__label">{{ option.name }}{%- if o_name == 'size' -%}<sizechart-trigger></sizechart-trigger>{%- endif -%}</legend>
                         {%- for value in option.values -%}
                           <input type="radio" id="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}"
                                 name="{{ option.name }}"
@@ -260,19 +260,6 @@
                 </div>
               </div>
             </noscript>
-          {%- when 'size_chart' -%}
-            {%- liquid
-            if product.options contains 'Size'
-              for collecion in product.collections
-                assign pageHandler = collecion.handle | append: "-size-chart"
-                assign size_chart = pages[pageHandler]
-                if size_chart != empty
-                  assign anchor_id = "ProductModal-" | append: section.id
-                  render 'size-chart', block_id: block.id, size_chart: size_chart, anchor_id: anchor_id
-                  break
-                endif
-              endfor
-            endif-%}
 
           {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
@@ -477,6 +464,10 @@
   </script>
 
   <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+{%- endif -%}
+
+{% if section.settings.enable_size_chart %}
+  {%- render 'product-page-sizechart', product: product, section: section -%}
 {%- endif -%}
 
 {% schema %}
@@ -777,6 +768,12 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_size_chart",
+      "default": true,
+      "label": "t:sections.main-product.settings.enable_size_chart.label"
     }
   ]
 }

@@ -1,0 +1,30 @@
+<script>
+  function initSizeChart() {
+    fetch(`{{ product.url }}/?section_id=sizechart`)
+      .then(response => response.text())
+      .then(text => {
+        var fragment = new DocumentFragment()
+        var div = document.createElement('div')
+        div.innerHTML = text
+        fragment.append(div)
+        var parentEle = fragment.getElementById('shopify-section-sizechart')
+        if (parentEle.innerHTML) {
+          let triggerHolder = document.querySelector('sizechart-trigger');
+          triggerHolder.append(parentEle.querySelector('modal-opener'));
+          let anchorEle = document.getElementById('{{ "ProductModal-" | append: section.id }}');
+          anchorEle.parentNode.append(parentEle.querySelector('#PopupModal-size_chart'));
+        }
+        fragment = null
+        div = null
+        parentEle= null
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  }
+  if (document.readyState !== 'loading') {
+    initSizeChart();
+  } else {
+    document.addEventListener('DOMContentLoaded', initSizeChart);
+  }
+</script>

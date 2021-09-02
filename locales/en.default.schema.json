@@ -1297,6 +1297,9 @@
         },
         "enable_video_looping": {
           "label": "Enable video looping"
+        },
+        "enable_size_chart": {
+          "label": "Enable size guide"
         }
       }
     },
